@@ -207,7 +207,9 @@
                             selected.dataset.selected = 0;
                             _this.remove();
                             clickCount = 0;
-                        }
+                        };
+
+                        page.event.change();
                     },
                     doubleTab: e => {
                         const _this = e.target;
@@ -225,7 +227,9 @@
                             selected.dataset.selected = 0;
                             _this.remove();
                             clickCount = 0;
-                        }
+                        };
+
+                        page.event.change();
                     },
                     selected: e => {
                         const _this = e.target;

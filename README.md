@@ -36,5 +36,5 @@ This source code project is licensed under the [MIT](https://github.com/pardnchi
 
 ***
 
-©️ 2023 [邱敬幃 Pardn Chiu](https://pardn.io)
+©️ 2025 [邱敬幃 Pardn Chiu](https://pardn.io)
 

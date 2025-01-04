@@ -36,5 +36,5 @@
 
 ***
 
-©️ 2024 [邱敬幃 Pardn Chiu](https://pardn.io)
+©️ 2025 [邱敬幃 Pardn Chiu](https://pardn.io)
 

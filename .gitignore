@@ -8,3 +8,5 @@ Icon?
 # 忽略其他
 .reset.sh
 .memo.md
+
+!icons

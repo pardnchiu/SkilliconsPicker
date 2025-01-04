@@ -109,7 +109,11 @@
                 <span class="material-symbols-outlined">
                     drag_pan
                 </span>
-                {{ i18n.drag }}
+                {{ i18n.drag }} |
+                <span class="material-symbols-outlined">
+                    touch_double
+                </span>
+                {{ i18n.tap }}
             </p>
             <section id="picker-result" :data-hint="i18n.empty" data-result="">
             </section>
@@ -122,7 +126,7 @@
         </section>
         <!--  -->
         <h2>{{ i18n.all }}</h2>
-        <section class="icons">
+        <section id="picker-icon" class="icons">
             <div :for="e in icons" :title="e" :data-selected="0" @click="selected">
                 <img :src="https://skillicons.dev/icons?i={{e}}">
                 <span class="material-symbols-outlined">
@@ -169,7 +173,8 @@
 
             lang = (isZh ? "zh" : "en");
 
-            let about, iOS, Web, day, editor;
+            let clickTimer = null;
+            let clickCount = 0;
 
             page = new QUI({
                 id: "body",
@@ -184,6 +189,44 @@
                     icons: icons
                 },
                 event: {
+                    doubleClick: e => {
+                        const _this = e.target;
+                        const title = _this.title.trim();
+                        const picker = document.getElementById("picker-icon");
+                        const selected = picker.querySelector("div[title='" + title + "']");
+
+                        clickCount++;
+
+                        if (clickCount === 1) {
+                            clickTimer = setTimeout(() => {
+                                clickCount = 0;
+                            }, 500);
+                        }
+                        else if (clickCount === 2 && selected != null) {
+                            clearTimeout(clickTimer);
+                            selected.dataset.selected = 0;
+                            _this.remove();
+                            clickCount = 0;
+                        }
+                    },
+                    doubleTab: e => {
+                        const _this = e.target;
+                        const title = _this.title.trim();
+                        const picker = document.getElementById("picker-icon");
+                        const selected = picker.querySelector("div[title='" + title + "']");
+
+                        if (clickCount === 1) {
+                            clickTimer = setTimeout(() => {
+                                clickCount = 0;
+                            }, 500);
+                        }
+                        else if (clickCount === 2 && selected != null) {
+                            clearTimeout(clickTimer);
+                            selected.dataset.selected = 0;
+                            _this.remove();
+                            clickCount = 0;
+                        }
+                    },
                     selected: e => {
                         const _this = e.target;
                         const title = _this.title.trim();
@@ -205,6 +248,8 @@
                             img.ondragover = page.event.dragOver;
                             img.ondragleave = page.event.dragLeave;
                             img.ondrop = page.event.drop;
+                            img.onclick = page.event.doubleClick;
+                            img.ontouchstart = page.event.doubleTab;
 
                             picker.appendChild(img)
                         };

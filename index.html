@@ -124,7 +124,7 @@
         <h2>{{ i18n.all }}</h2>
         <section class="icons">
             <div :for="e in icons" :title="e" :data-selected="0" @click="selected">
-                <img :lazyload="https://skillicons.dev/icons?i={{e}}">
+                <img :src="https://skillicons.dev/icons?i={{e}}">
                 <span class="material-symbols-outlined">
                     check_circle
                 </span>

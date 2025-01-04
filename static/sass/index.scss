@@ -27,7 +27,7 @@ body {
     align-items: center;
     gap: $_12;
     background-color: #F4F2ED;
-    padding: 6rem 0 0;
+    padding: 6rem $_12 0;
     width: 100%;
     height: 100%;
     overflow: hidden scroll;
@@ -43,6 +43,7 @@ body {
     >h1 {
         font-size: $_20;
         line-height: $_28;
+        text-align: center;
     }
 
     >a {
@@ -56,10 +57,17 @@ body {
         margin-top: $_12;
         width: 100%;
         max-width: 832px;
-        padding: 0 $_32;
+        padding: 0 $_8;
+
+        @media screen and (min-width: 640px) {
+            padding: 0 $_32;
+        }
     }
 
     >section.result {
+        z-index: 1000;
+        position: sticky;
+        top: -96px;
         display: flex;
         flex-flow: column;
         justify-content: center;
@@ -67,10 +75,15 @@ body {
         gap: $_16;
         padding: $_16;
         background-color: #fff;
-        width: calc(100% - $_64);
+        width: calc(100% - $_16);
         max-width: 780px;
         border-radius: $_8;
         box-shadow: 0 $_2 $_4 #0000001a;
+        transition: 0.3s;
+
+        @media screen and (min-width: 640px) {
+            width: calc(100% - $_64);
+        }
 
         &:has(img) {
             p {
@@ -83,15 +96,22 @@ body {
                 pointer-events: initial;
             }
 
-            >section::before {
+            >section.result::before {
                 display: none;
             }
+        }
+
+        &[data-topest="1"] {
+            width: 100vw;
+            border-radius: 0 0 $_8 $_8;
+            box-shadow: 0 $_4 $_8 #0000001a;
         }
 
         p {
             display: flex;
             align-items: center;
-            gap: $_4;
+            flex-flow: row wrap;
+            gap: $_12;
             font-size: $_14;
             color: rgba(75, 85, 99, 1);
             opacity: 0.2;
@@ -99,23 +119,39 @@ body {
             span.material-symbols-outlined {
                 font-size: $_16;
             }
+
+            span:not(.material-symbols-outlined) {
+                display: flex;
+                gap: $_4;
+            }
         }
 
         button {
             display: flex;
             align-items: center;
             gap: $_4;
+            padding: 0 $_16;
+            text-decoration: none;
             font-size: $_14;
+            line-height: $_40;
             opacity: 0.2;
             cursor: not-allowed;
             pointer-events: none;
+            background-color: #0000001a;
+            border-radius: $_20;
+            transition: 0.3s;
 
             span.material-symbols-outlined {
                 font-size: $_16;
             }
+
+            &:active {
+                transform: scale(0.97);
+                background-color: #00000034;
+            }
         }
 
-        >section {
+        >section.result {
             display: flex;
             flex-flow: row wrap;
             justify-content: flex-start;
@@ -140,6 +176,14 @@ body {
                 color: #00000080;
                 border-radius: $_12;
             }
+        }
+
+        >section {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            gap: $_12;
+            width: 100%;
         }
     }
 

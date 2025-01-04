@@ -106,23 +106,35 @@
         <h2>{{ i18n.picked }}</h2>
         <section class="result">
             <p>
-                <span class="material-symbols-outlined">
-                    drag_pan
+                <span>
+                    <span class="material-symbols-outlined">
+                        drag_pan
+                    </span>
+                    {{ i18n.drag }}
                 </span>
-                {{ i18n.drag }} |
-                <span class="material-symbols-outlined">
-                    touch_double
+                <span>
+                    <span class="material-symbols-outlined">
+                        touch_double
+                    </span>
+                    {{ i18n.tap }}
                 </span>
-                {{ i18n.tap }}
             </p>
-            <section id="picker-result" :data-hint="i18n.empty" data-result="">
+            <section id="picker-result" class="result" :data-hint="i18n.empty" data-result="">
             </section>
-            <button @click="copy">
-                <span class="material-symbols-outlined">
-                    content_copy
-                </span>
-                {{ i18n.copy }}
-            </button>
+            <section>
+                <button @click="open">
+                    <span class="material-symbols-outlined">
+                        open_in_new
+                    </span>
+                    {{ i18n.open }}
+                </button>
+                <button @click="copy">
+                    <span class="material-symbols-outlined">
+                        content_copy
+                    </span>
+                    {{ i18n.copy }}
+                </button>
+            </section>
         </section>
         <!--  -->
         <h2>{{ i18n.all }}</h2>
@@ -309,6 +321,10 @@
                         const picker = document.getElementById("picker-result");
                         picker.dataset.result = [...picker.children].map(e => e.title).join(",");
                     },
+                    open: e => {
+                        const picker = document.getElementById("picker-result");
+                        window.open("https://skillicons.dev/icons?i=" + picker.dataset.result)
+                    },
                     copy: e => {
                         const picker = document.getElementById("picker-result");
                         const _this = e.target;
@@ -318,9 +334,9 @@
                         try {
                             navigator.clipboard.writeText("https://skillicons.dev/icons?i=" + picker.dataset.result);
 
-                            _this.innerHTML = _this.innerHTML.replace(/拷貝結果/, "已拷貝").replace(/Copy link/, "Copied");
+                            _this.innerHTML = _this.innerHTML.replace(/拷貝連結/, "已拷貝").replace(/Copy link/, "Copied");
                             copyTimer = setTimeout(() => {
-                                _this.innerHTML = _this.innerHTML.replace(/已拷貝/, "拷貝結果").replace(/Copied/, "Copy link");
+                                _this.innerHTML = _this.innerHTML.replace(/已拷貝/, "拷貝連結").replace(/Copied/, "Copy link");
                             }, 500);
                         }
                         catch (err) {
@@ -328,6 +344,15 @@
                         };
                     }
                 },
+                when: {
+                    rendered: _ => {
+                        document.body.addEventListener("scroll", e => {
+                            let dom = document.getElementById("picker-result").parentElement
+
+                            dom.dataset.topest = document.body.scrollTop >= dom.offsetTop ? 1 : 0
+                        })
+                    }
+                }
             });
         });
     </script>

@@ -54,7 +54,6 @@
         <link rel="preconnect" href="https://cdn.jsdelivr.net">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
         <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" as="style">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
@@ -188,6 +187,27 @@
             let clickTimer = null;
             let clickCount = 0;
 
+            function removeFromResult(event) {
+                const _this = event.target;
+                const title = _this.title.trim();
+                const picker = document.getElementById("picker-icon");
+                const selected = picker.querySelector("div[title='" + title + "']");
+
+                if (clickCount === 1) {
+                    clickTimer = setTimeout(() => {
+                        clickCount = 0;
+                    }, 500);
+                }
+                else if (clickCount === 2 && selected != null) {
+                    clearTimeout(clickTimer);
+                    selected.dataset.selected = 0;
+                    _this.remove();
+                    clickCount = 0;
+                };
+
+                page.event.change();
+            }
+
             page = new QUI({
                 id: "body",
                 i18n: {
@@ -202,46 +222,12 @@
                 },
                 event: {
                     doubleClick: e => {
-                        const _this = e.target;
-                        const title = _this.title.trim();
-                        const picker = document.getElementById("picker-icon");
-                        const selected = picker.querySelector("div[title='" + title + "']");
-
                         clickCount++;
 
-                        if (clickCount === 1) {
-                            clickTimer = setTimeout(() => {
-                                clickCount = 0;
-                            }, 500);
-                        }
-                        else if (clickCount === 2 && selected != null) {
-                            clearTimeout(clickTimer);
-                            selected.dataset.selected = 0;
-                            _this.remove();
-                            clickCount = 0;
-                        };
-
-                        page.event.change();
+                        removeFromResult(e);
                     },
                     doubleTab: e => {
-                        const _this = e.target;
-                        const title = _this.title.trim();
-                        const picker = document.getElementById("picker-icon");
-                        const selected = picker.querySelector("div[title='" + title + "']");
-
-                        if (clickCount === 1) {
-                            clickTimer = setTimeout(() => {
-                                clickCount = 0;
-                            }, 500);
-                        }
-                        else if (clickCount === 2 && selected != null) {
-                            clearTimeout(clickTimer);
-                            selected.dataset.selected = 0;
-                            _this.remove();
-                            clickCount = 0;
-                        };
-
-                        page.event.change();
+                        removeFromResult(e);
                     },
                     selected: e => {
                         const _this = e.target;

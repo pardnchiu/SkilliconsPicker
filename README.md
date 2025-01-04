@@ -6,6 +6,9 @@
 
 ## Features
 
+### Icon Source
+- Seamlessly integrates with [Skill Icons](https://github.com/tandpfun/skill-icons) for efficient and streamlined icon retrieval.
+
 ### Fast Icon Selection
 - Offers the complete Skill Icons library, enabling users to quickly filter and select the desired icons.
 

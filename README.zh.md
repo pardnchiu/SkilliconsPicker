@@ -6,6 +6,9 @@
 
 ## 核心特色
 
+### 圖示來源
+- 無縫整合 [Skill Icons](https://github.com/tandpfun/skill-icons)，高效獲取所需圖示。
+
 ### 快速圖示挑選
 - 提供 Skill Icons 的完整庫存，讓使用者輕鬆篩選並挑選需要的技能圖示。
 

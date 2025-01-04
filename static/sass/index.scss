@@ -203,4 +203,22 @@ body {
             color: #4D5562;
         }
     }
+
+    >a.lang {
+        position: fixed !important;
+        right: $_24;
+        bottom: $_24;
+        display: flex;
+        align-items: center;
+        gap: $_8;
+        padding: 0 1rem;
+        line-height: $_40;
+        text-decoration: none;
+        color: #000;
+        background-color: #ffffffcc;
+        backdrop-filter: blur(1rem);
+        -webkit-backdrop-filter: blur(1rem);
+        border-radius: $_12;
+        box-shadow: 0 $_4 $_8 #0000001a;
+    }
 }

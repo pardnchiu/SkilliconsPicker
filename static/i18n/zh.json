@@ -1,5 +1,8 @@
 {
     "title": "使用 <a href='https://skillicons.dev/' target='_blank'>Skill Icons</a> 圖示所製作的選擇器",
     "picked": "你的選擇",
+    "drag": "拖曳即可調整順序",
+    "empty": "尚未選擇圖示",
+    "copy": "拷貝結果",
     "all": "所有圖示"
 }

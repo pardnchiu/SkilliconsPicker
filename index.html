@@ -102,23 +102,25 @@
             </span>
             MIT License
         </a>
+        <!--  -->
         <h2>{{ i18n.picked }}</h2>
         <section class="result">
             <p>
                 <span class="material-symbols-outlined">
                     drag_pan
                 </span>
-                拖曳即可調整順序
+                {{ i18n.drag }}
             </p>
-            <section id="picker-result" data-hint="尚未選擇圖示" data-result="">
+            <section id="picker-result" :data-hint="i18n.empty" data-result="">
             </section>
             <button @click="copy">
                 <span class="material-symbols-outlined">
                     content_copy
                 </span>
-                拷貝結果
+                {{ i18n.copy }}
             </button>
         </section>
+        <!--  -->
         <h2>{{ i18n.all }}</h2>
         <section class="icons">
             <div :for="e in icons" :title="e" :data-selected="0" @click="selected">
@@ -128,6 +130,7 @@
                 </span>
             </div>
         </section>
+        <!--  -->
         <footer>
             <a href="https://github.com/pardnchiu/skill-icons-picker" target="_blank">
                 <i class="fa-brands fa-github"></i>
@@ -136,6 +139,11 @@
                 <i class="fa-solid fa-globe"></i>
             </a>
         </footer>
+        <!--  -->
+        <a :href="./index.html?lang={{ change }}" class="lang">
+            <i class="fa-solid fa-globe"></i>
+            <span>{{ change }}</span>
+        </a>
     </body>
     <script>
         document.addEventListener("DOMContentLoaded", async _ => {
@@ -261,9 +269,9 @@
                         try {
                             navigator.clipboard.writeText("https://skillicons.dev/icons?i=" + picker.dataset.result);
 
-                            _this.innerHTML = _this.innerHTML.replace(/拷貝結果/, "已拷貝").replace(/copy code/, "copied");
+                            _this.innerHTML = _this.innerHTML.replace(/拷貝結果/, "已拷貝").replace(/Copy link/, "Copied");
                             copyTimer = setTimeout(() => {
-                                _this.innerHTML = _this.innerHTML.replace(/已拷貝/, "拷貝結果").replace(/copied/, "copy code");
+                                _this.innerHTML = _this.innerHTML.replace(/已拷貝/, "拷貝結果").replace(/Copied/, "Copy link");
                             }, 500);
                         }
                         catch (err) {

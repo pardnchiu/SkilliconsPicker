@@ -1,5 +1,8 @@
 {
     "title": "Picker made using <a href='https://skillicons.dev/' target='_blank'>Skill Icons</a>.",
     "picked": "Icons you picked",
+    "drag": "Drag to adjust order",
+    "empty": "No icons selected yet",
+    "copy": "Copy link",
     "all": "All Icons"
 }

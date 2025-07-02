@@ -164,10 +164,10 @@
         document.addEventListener("DOMContentLoaded", async _ => {
             let icons = [], copyTimer;
 
-            await fetch("icons")
-                .then(response => response.text())
+            await fetch("https://skillicon-list.pardn.workers.dev/")
+                .then(response => response.json())
                 .then(data => {
-                    icons = data.split("\n").map(e => e.trim()).filter(e => e.length);
+                    icons = data;
                 })
                 .catch(error => {
                     console.error(error);
